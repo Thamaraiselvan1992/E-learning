@@ -1,0 +1,40 @@
+
+    {% extends "header.html" %}
+    {% load crispy_forms_tags %}
+    {% block content %}
+    <div class="container mt-2">
+        <div style="float: right;font-size: large;"> <button onclick="history.back()"  class="btn-shadow  btn btn-info">
+            Back
+         </button></div>
+        <!--   <div class="card card-block mb-2">
+            <h4 class="card-title">Card 1</h4>
+            <p class="card-text">Welcom to bootstrap card styles</p>
+            <a href="#" class="btn btn-primary">Submit</a>
+          </div>   -->
+         
+          
+          <div class="row" style="margin-top:80px">
+         
+            <div class="col-md-12 col-sm-12 item">
+              <div class="card item-card card-block">
+              
+                <form class="flex-c" method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                  <!-- <div class="check">
+                    <input type="checkbox" name="" id="">
+                    <span>I've read and agree with T&C</span>
+                  </div> -->
+                  <div class="text-center"><input class="btn-shadow  btn btn-info" type="submit" value="Create an Note"></div>
+                  
+                 
+                </form> 
+                
+            </div>
+            </div>
+        
+          </div>
+     
+          
+        </div>
+        {% endblock %}

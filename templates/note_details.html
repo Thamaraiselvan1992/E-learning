@@ -1,0 +1,77 @@
+{% extends "header.html" %}
+    {% block content %}
+    <div class="container mt-2">
+        <div style="float: right;font-size: large;"> <button onclick="history.back()"  class="btn-shadow  btn btn-info">
+            Back
+         </button></div>
+        <!--   <div class="card card-block mb-2">
+            <h4 class="card-title">Card 1</h4>
+            <p class="card-text">Welcom to bootstrap card styles</p>
+            <a href="#" class="btn btn-primary">Submit</a>
+          </div>   -->
+          {% if note %}
+          <div class="col-md-5"> 
+            <button type="button" class="btn_choose_sent bg_btn_chose_3" style="color:black;" onclick="activeNote('#f5f8fa')">
+                <input type="radio" name="name" value="3"  />Start
+            </button>
+            <button type="button" class="btn_choose_sent bg_btn_chose_1" onclick="activeNote('#f8b5a0')">
+                <input type="radio" name="name" value="1"  />Study
+            </button>
+            <button type="button" class="btn_choose_sent bg_btn_chose_2"   onclick="activeNote('#a88accdb')">
+                <input type="radio" name="name" value="2"  />Completed
+            </button>
+        </div>
+        <input type="hidden" value="" id="color">
+          <div class="row" style="margin-top:80px">
+         
+            <div class="col-md-12 col-sm-12 item">
+              <div class='card item-card card-block {%if note.color %} {{note.color}} {% endif %}' id="note-color" >
+              <div class="row">
+                  <div class="col-md-7"> 
+                      <h5 class="item-card-title mt-3 mb-3"><b>{{ note.title}}</b></h5>
+                </div>
+              
+            </div>
+               
+               <br><br>
+                <p class="card-text space pt-5">{{ note.message| linebreaksbr }}</p> 
+                
+            </div>
+            </div>
+            
+            
+          </div>
+          <br>
+          <br>
+     
+          <div class="text-center" style="margin-top: 20px;" ><button class="btn-shadow  btn btn-info" onclick="saveChange('{{note.id}}')">Save</button></div>
+          {% endif %}
+          
+        </div>
+        
+ <script>
+     function activeNote(class_name){
+        //  alert(class_name);
+         // $('#note-color .bg_btn_chose_1,.bg_btn_chose_2,.bg_btn_chose_3').removeClass()
+         $('#note-color').removeClass('bg_btn_chose_1');
+         $('#note-color').removeClass('bg_btn_chose_2');
+         $('#note-color').removeClass('bg_btn_chose_3');
+         if(class_name =='#f5f8fa'){
+            $('#color').val(3);
+            $('.card').css('color', 'black');
+         }else if(class_name=='#f8b5a0'){
+            $('#color').val(1);
+         }else{
+           
+            $('#color').val(2);
+         }
+         // $('#color').val(class_name);
+         $('.card').css('background', class_name);
+     }
+     function saveChange(note_id){
+        var color =$("#color").val();
+        urlVal ='/cms/update_note?note_id='+note_id+'&color='+color;
+        window.location = urlVal;
+     }
+ </script>
+ {% endblock %}

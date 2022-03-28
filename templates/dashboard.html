@@ -1,0 +1,43 @@
+
+    {% extends "header.html" %}
+    {% block content %}
+    <div class="container mt-2">
+        <div style="float: right;font-size: large;"><a href="/cms/add-note/">Add Note</a></div>
+        <!--   <div class="card card-block mb-2">
+            <h4 class="card-title">Card 1</h4>
+            <p class="card-text">Welcom to bootstrap card styles</p>
+            <a href="#" class="btn btn-primary">Submit</a>
+          </div>   -->
+          
+    {% if query %}
+    <br>
+    <h4>For the term "<a>{{query}}</a>". </h4>
+
+           <h2>
+          
+           {% with note.count as total_results %}
+
+           Found {{ total_results }} result{{ total_results|pluralize }} <a href="/cms/dashboard/">All Notes</a>
+
+           {% endwith %}
+
+           </h2>
+      {% endif %}
+          {% if note %}
+          
+          <div class="row" style="margin-top:40px">
+              {% for n in note %}
+            <div class="col-md-6 col-sm-6 item">
+              <div class="card item-card card-block {%if n.color %}{{n.color}}{% endif %}">
+              <h4 class="card-title text-right"><a href='/cms/delete/{{n.id}}'>delete</a></h4>
+                <h5 class="item-card-title mt-3 mb-3"><b>{{ n.title}}</b></h5>
+                <p class="card-text space">{{ n.message| truncatechars:100 }}</p> 
+                <a href="/cms/note/{{n.id}}" class="text-center">read more</a>
+            </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          
+        </div>
+        {% endblock %}

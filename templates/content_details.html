@@ -1,0 +1,19 @@
+{% extends 'home.html' %} 
+{% block content %}
+<section id="discovery" class="discovery py-5" style="padding: 60px;">
+    <div class="row align-items-center container my-5 mx-auto">
+
+        <div class="pt-5">
+        <p>{{content.body | safe }}</p>
+    </div>  
+    </div>
+
+    {% if content.url %}
+    <div class="text-center pt-3" style="padding-top: 10%;">
+        <iframe width="680" height="345" src="{{ content.url}}">
+        </iframe>
+    </div>
+    {% endif %}
+  </section>
+
+  {% endblock %}

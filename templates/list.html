@@ -1,0 +1,28 @@
+
+{% for post in menus %}
+<div class="one col-lg-4 col-md-4 col-12 w-25 m-2">
+  <h5 class="font-weight-bold pt-4">{{post.menu}}</h5>
+  {% for smenu in post.submenus %}
+  <a href="{{ smenu.get_absolute_url }}" class="btn btn-primary">Read more</a>
+  {% endfor %}
+</div>
+{% endfor %}
+<script>
+$('.delete').click(function(){
+  var sid;
+  sid = $(this).attr("data-sid");
+  if (confirm("Are you confirm delete the student?")) {
+      $.ajax(
+  {
+      type:"GET",
+      url: "/students/delete/"+sid,
+      success: function( data ) 
+      {
+          $( '#'+ sid ).remove();
+          alert(data)
+      }
+   })
+  } 
+ 
+});
+</script>
